@@ -27,20 +27,12 @@ void setup() {
   delay(1000);
 }
 
-/*void loop(){
-  analogWrite(motorRight, 255);
-  analogWrite(motorLeftBack, 255);
-  delay(100);
-}*/
-
 void loop() {
-  //Serial.println("working");
   long duration, distance;
-  digitalWrite(trigPin, LOW);  // Added this line
-  delayMicroseconds(2); // Added this line
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
-//  delayMicroseconds(1000); - Removed this line
-  delayMicroseconds(10); // Added this line
+  delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
