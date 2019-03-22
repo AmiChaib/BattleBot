@@ -50,8 +50,6 @@ void forward(int speeed, int timey){
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Wiu wiu wiu!");
-    delay(1); 
-    //don't know if we need this delay, we can try without (-> if working apply to all other functions).
     analogWrite(motorLeft, speeed);
     analogWrite(motorRight, speeed);
     delay(timey); 
@@ -65,7 +63,6 @@ void backwards(int speeed, int timey){
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Beep beep beep!");
-    delay(1);
     analogWrite(motorLeftBack, speeed);
     analogWrite(motorRightBack, speeed);
     delay(timey);
@@ -80,7 +77,6 @@ void turnRight(int speeed, int timey){
     lcd.setCursor(0, 0);
     //I wish we had leds on both sides of the arduino, like the indicators on a car :3
     lcd.print("To the right!"); 
-    delay(1);
     analogWrite(motorLeft, speeed);
     analogWrite(motorRightBack, speeed);
     delay(timey);
@@ -94,7 +90,6 @@ void turnLeft(int speeed, int timey){
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("To the left!");
-    delay(1); 
     analogWrite(motorRight, speeed);
     analogWrite(motorLeftBack, speeed);
     delay(timey);
@@ -103,14 +98,12 @@ void turnLeft(int speeed, int timey){
 
 //turns right 90deg 
 void right90(){
-  //TODO: measure time in which it turns 90deg
-  turnRight(255, 300/*Please replace with the correct time*/);
+  turnRight(255, 350);
 }
 
 //turns left 90deg
 void left90(){
-  //TODO: measure time in which it turns 90deg
-  turnLeft(255, 300/*Please replace with the correct time*/);
+  turnLeft(255, 350);
 }
 
 void loop(){
