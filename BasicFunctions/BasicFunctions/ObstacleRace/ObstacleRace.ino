@@ -1,9 +1,10 @@
 
 //all motors called analog
-#define motorLeft 3
-#define motorLeftBack 2
-#define motorRight 9
-#define motorRightBack 4  
+//motors set up for number 05
+#define motorLeft 2
+#define motorLeftBack 3
+#define motorRight 4
+#define motorRightBack 9  
 #define trigPin 13
 #define echoPin 12
 
@@ -105,8 +106,11 @@ void left90(){
   turnLeft(255, 350);
 }
 
-void loop(){
-  long duration, distance;
+//measures distance
+long duration, distance;
+void getDistance(){
+  duration = 0;
+  distance = 0;
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
@@ -115,27 +119,54 @@ void loop(){
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
   delay(20);
-  while(distance > 20){
-    forward(255, 100);
-  }
-  halt();
-  int timeTurned = 0;
-  while(distance < 20){
+}
+
+//determines direction to turn
+int index = 0;
+int timeLeft = 0;
+int timeRight = 0;
+void getDirection(){
+  if(index == 0){
     turnLeft(255, 30);
-    timeTurned += 30;
-    while((timeTurned >= 600) && (timeTurned <= 800)){
-      turnLeft(255, 50);
-      timeTurned += 50;
-    }
-  }
-  forward(255, 50);
-  if(timeTurned < 700){
-    turnRight(255, timeTurned);
+    timeLeft += 30;
   }
   else{
-    int newTime = 1400 - timeTurned;
-    turnLeft(255, newTime);
-    newTime = 0;
+    turnRight(255, 30);
+    timeRight += 30;
   }
-  timeTurned = 0;
+}
+
+void loop(){
+  int timeTurned = 0;
+  timeLeft = 0;
+  timeRight = 0;
+  getDistance();
+  while(distance > 30){
+    forward(255, 50);
+    getDistance();
+  }
+  halt();
+  backwards(255, 30);
+  while(distance <= 30){
+    getDirection();
+    timeTurned += 30;
+    if((timeTurned >= 600)){
+      if(index == 0){
+        right90();
+        index = 1; 
+      }
+      else{
+        left90();
+        index = 0;
+      }     
+    }
+    getDistance();
+  }
+  for(int i = 0; i < 3; i++){
+    getDistance();
+    if(distance > 30){
+      forward(255, 50);
+    }
+  }
+  getDistance();
 }
