@@ -44,7 +44,7 @@ void halt(){
 
 //moves forward
 void forward(int speeed, int timey){
-  if(speeed > 0 && speeed < 256){
+  if((speeed > 0) && (speeed < 256)){
     halt();
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -57,7 +57,7 @@ void forward(int speeed, int timey){
 
 //moves backwards
 void backwards(int speeed, int timey){
-  if(speeed > 0 && speeed < 256){
+  if((speeed > 0) && (speeed < 256)){
     halt();
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -70,7 +70,7 @@ void backwards(int speeed, int timey){
 
 //turns right on spot
 void turnRight(int speeed, int timey){
-  if(speeed > 0 && speeed < 256){
+  if((speeed > 0) && (speeed < 256)){
     halt();
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -84,7 +84,7 @@ void turnRight(int speeed, int timey){
 
 //turns left on spot
 void turnLeft(int speeed, int timey){
-  if(speeed > 0 && speeed < 256){
+  if((speeed > 0) && (speeed < 256)){
     halt();
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -106,4 +106,36 @@ void left90(){
 }
 
 void loop(){
+  long duration, distance;
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
+  delay(20);
+  while(distance > 20){
+    forward(255, 100);
+  }
+  halt();
+  int timeTurned = 0;
+  while(distance < 20){
+    turnLeft(255, 30);
+    timeTurned += 30;
+    while((timeTurned >= 600) && (timeTurned <= 800)){
+      turnLeft(255, 50);
+      timeTurned += 50;
+    }
+  }
+  forward(255, 50);
+  if(timeTurned < 700){
+    turnRight(255, timeTurned);
+  }
+  else{
+    int newTime = 1400 - timeTurned;
+    turnLeft(255, newTime);
+    newTime = 0;
+  }
+  timeTurned = 0;
 }
