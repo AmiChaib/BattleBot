@@ -159,6 +159,7 @@ void loop(){
         left90();
         index = 0;
       }     
+      timeTurned = 0;
     }
     getDistance();
   }
