@@ -1,6 +1,6 @@
 
 //all motors called analog
-//motors set up for number 05
+//motors set up for number 08
 #define motorLeft 3
 #define motorLeftBack 2
 #define motorRight 9
@@ -150,7 +150,7 @@ void loop(){
   while(distance <= 30){
     getDirection();
     timeTurned += 30;
-    if((timeTurned >= 350)){
+    if((timeTurned > 350)){
       if(index == 0){
         right90();
         index = 1; 
