@@ -1,10 +1,10 @@
 
 //all motors called analog
 //motors set up for number 05
-#define motorLeft 2
-#define motorLeftBack 3
-#define motorRight 4
-#define motorRightBack 9  
+#define motorLeft 3
+#define motorLeftBack 2
+#define motorRight 9
+#define motorRightBack 4  
 #define trigPin 13
 #define echoPin 12
 
@@ -150,7 +150,7 @@ void loop(){
   while(distance <= 30){
     getDirection();
     timeTurned += 30;
-    if((timeTurned >= 600)){
+    if((timeTurned >= 350)){
       if(index == 0){
         right90();
         index = 1; 
