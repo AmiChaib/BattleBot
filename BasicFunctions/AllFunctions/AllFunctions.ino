@@ -3,6 +3,7 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
+
 /*     DEFINING CONSTANTS     */
 /* --------- Motors --------- */ 
 //Set up for number 08
@@ -147,6 +148,7 @@ void getDirection(){
   }
 }
 
+
 /*            MODES             */
 /* ------ manual control ------ */
 void manual(){
@@ -211,12 +213,13 @@ void obstacleRace(){
 /* ----- determining mode ----- */
 int getMode(){
   // Get input from server...?
-  // Determin mode: 1 = manual, 2 = waypoints, 3 = followLine, 4 = obstacleRace, anything else = halt;
+  // Determine mode: 1 = manual, 2 = waypoints, 3 = followLine, 4 = obstacleRace, anything else = halt;
   int mode = 0;
   return mode;
 }
 
-/* ------ Executing loop ------ */
+
+/* ------ EXECUTING LOOP ------ */
 void loop(){
   int mode = getMode();
   switch(mode){
