@@ -196,13 +196,16 @@ void obstacleRace(){
     }
     getDistance();
   }
-  for(int i = 0; i < 3; i++){
-    getDistance();
-    if(distance > 30){
-      forward(255, 50);
-    }
-  }
-  getDistance();
+  /* Not necessary I think... We can try out if it makes a difference.
+   * 
+   *  for(int i = 0; i < 3; i++){
+   *    getDistance();
+   *    if(distance > 30){
+   *      forward(255, 50);
+   *    }
+   *  }
+   *  getDistance();
+   */
 }
 
 /* ----- determining mode ----- */
@@ -213,6 +216,7 @@ int getMode(){
   return mode;
 }
 
+/* ------ Executing loop ------ */
 void loop(){
   int mode = getMode();
   switch(mode){
