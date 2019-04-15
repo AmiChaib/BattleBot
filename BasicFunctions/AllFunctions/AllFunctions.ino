@@ -94,7 +94,7 @@ void turnRight(int speeed, int timey){
     //I wish we had LEDs on both sides of the arduino, like the indicators on a car :3
     lcd.print("To the right!"); 
     analogWrite(motorLeft, speeed);
-    analogWrite(motorRightBack, speeed);
+    analogWrite(motorRightBack, 255);
     delay(timey);
   } 
 }
@@ -107,7 +107,7 @@ void turnLeft(int speeed, int timey){
     lcd.setCursor(0, 0);
     lcd.print("To the left!");
     analogWrite(motorRight, speeed);
-    analogWrite(motorLeftBack, speeed);
+    analogWrite(motorLeftBack, 255);
     delay(timey);
   } 
 }
@@ -158,17 +158,25 @@ void waypoints(){
 }
 /* ----- Follow line mode ----- */
 void followLine(){
+  int direction;
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==LOW)){
-    forward(100, 50);
+    forward(180, 20);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
-    halt();
+    if(direction == 1){
+      turnLeft(120, 30);
+    }
+    if(direction == 2){
+      turnRight(120, 30);
+    }
   }
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==HIGH)){
-    turnLeft(100, 50);
+    direction = 1;
+    turnLeft(100, 60);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==LOW)){
-    turnRight(100, 50);
+    direction = 2;
+    turnRight(100, 60);
   }
 }
 
@@ -222,6 +230,7 @@ int getMode(){
 /* ------ EXECUTING LOOP ------ */
 void loop(){
   int mode = getMode();
+  mode = 3;
   switch(mode){
     case 1:
       manual();
