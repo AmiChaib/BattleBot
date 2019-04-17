@@ -206,16 +206,6 @@ void obstacleRace(){
     }
     getDistance();
   }
-  /* Not necessary I think... We can try out if it makes a difference.
-   * 
-   *  for(int i = 0; i < 3; i++){
-   *    getDistance();
-   *    if(distance > 30){
-   *      forward(255, 50);
-   *    }
-   *  }
-   *  getDistance();
-   */
 }
 
 /* ----- determining mode ----- */

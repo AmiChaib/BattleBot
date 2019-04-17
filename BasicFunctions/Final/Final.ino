@@ -1,8 +1,8 @@
 /* ----------------------------------------------------------- LIBRARIES ----------------------------------------------------------- */
 #include <SoftwareSerial.h>
 #include <Wire.h>
-//#include <LiquidCrystal_I2C.h>
-//LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
 /* !! SET UP FOR NUMBER 10 !! */
 /* ------------------------------------------------------ DEFINING CONSTANTS ------------------------------------------------------  */
@@ -48,12 +48,11 @@ void setup() {
   /* ------ Ultra sonic ------  */
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  /* ---------- //lcd ----------  */
-  //lcd.begin(16, 2);
-  //lcd.backlight();
-  //lcd.setCursor(0, 0);
-  //lcd.print("Awaiting orders!");
-  //delay(1000);
+  /* ---------- lcd ----------  */
+  lcd.begin(16, 2);
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Awaiting orders!");
   /* ----- Light sensors -----  */
   pinMode(LS, INPUT); 
   pinMode(RS, INPUT);
@@ -68,11 +67,11 @@ void halt(){
   analogWrite(motorForwardLeft, 0);
   analogWrite(motorForwardRight, 0);
   delay(1);
-  //lcd.clear();
-  //lcd.setCursor(0, 0);
-  //lcd.print("Stop!");
-  //lcd.setCursor(0, 1);
-  //lcd.print("Awaiting orders!");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Stop!");
+  lcd.setCursor(0, 1);
+  lcd.print("Awaiting orders!");
 }
 
 /* Just to clarify: 
@@ -84,9 +83,9 @@ void halt(){
 void forward(int speeed, int timey){
   if((speeed > 0) && (speeed < 256)){
     halt();
-    //lcd.clear();
-    //lcd.setCursor(0, 0);
-    //lcd.print("Wiu wiu wiu!"); 
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Wiu wiu wiu!"); 
     analogWrite(motorForwardLeft, speeed);
     analogWrite(motorForwardRight, speeed);
     delay(timey); 
@@ -97,9 +96,9 @@ void forward(int speeed, int timey){
 void backwards(int speeed, int timey){
   if((speeed > 0) && (speeed < 256)){
     halt();
-    //lcd.clear();
-    //lcd.setCursor(0, 0);
-    //lcd.print("Beep beep beep!");
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Beep beep beep!");
     analogWrite(motorBackwardsLeft, speeed);
     analogWrite(motorBackwardsRight, speeed);
     delay(timey);
@@ -110,10 +109,10 @@ void backwards(int speeed, int timey){
 void turnRight(int speeed, int timey){
   if((speeed > 0) && (speeed < 256)){
     halt();
-    //lcd.clear();
-    //lcd.setCursor(0, 0);
+    lcd.clear();
+    lcd.setCursor(0, 0);
     //I wish we had LEDs on both sides of the arduino, like the indicators on a car :3
-    //lcd.print("To the right!"); 
+    lcd.print("To the right!"); 
     analogWrite(motorForwardLeft, speeed);
     analogWrite(motorBackwardsRight, speeed);
     delay(timey);
@@ -124,9 +123,9 @@ void turnRight(int speeed, int timey){
 void turnLeft(int speeed, int timey){
   if((speeed > 0) && (speeed < 256)){
     halt();
-    //lcd.clear();
-    //lcd.setCursor(0, 0);
-    //lcd.print("To the left!");
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("To the left!");
     analogWrite(motorForwardRight, speeed);
     analogWrite(motorBackwardsLeft, speeed);
     delay(timey);
@@ -171,65 +170,34 @@ void getDirection(){
 
 /* ------------------------------------------------------------- MODES ------------------------------------------------------------- */
 /* ------------------- functions for game modes ------------------- */
-/* ---- getting server msg ---- */
-String GetServerMessage() {
-  String serverMessage = ""; // Creates variable for serverMessage
-  while (serial.available() > 0) { // Reads while the server is sending stuff
-    serverMessage.concat((char)serial.read()); // Gets a character from the server
-  }
-  if(serverMessage != ""){ // Checks if there was a serverMessage received
-    if (serverMessage.length() == 8){ // Checks if the serverMessage was 8 characters long
-      if(serverMessage == "00000000") // Checks if it's "00000000", it came to a stop
-        serial.write("stop"); // Sends "stop" signal to server
-      else
-       serial.write("move"); // Sends "move" signal to the server
-    }
-  }
-  return serverMessage; // Returns the serverMessage
-}
-/* -- processing server msg --  */
-void ProcessServer(String serverMessage) {
-  // Parsing logic: example: 12512500
-  //   125           125           0             0
-  // FrontLeft | FrontRight | ReverseLeft | ReverseRight
-  
-  int FL = serverMessage.substring(0, 3).toInt();
-  int FR = serverMessage.substring(3, 6).toInt();
-  int RL = serverMessage.substring(6, 7).toInt();
-  int RR = serverMessage.substring(7).toInt();
-  analogWrite(m_FL, FL);
-  analogWrite(m_FR, FR);
-  if(RL != 0)
-    digitalWrite(m_RL, HIGH);
-  else
-    digitalWrite(m_RL, LOW);
-  if(RR != 0)
-    digitalWrite(m_RR, HIGH);
-  else
-    digitalWrite(m_RR, LOW);
-}
-/* ------ manual control ------ */
+/* ------ Manual control ------ */
 void manual(){
-  ProcessServer(GetServerMessage());
-  delay(25);
 }
-/* -------- waypoints --------  */
+/* -------- Waypoints --------  */
 void waypoints(){
   halt(); //replace with waypoints method
 }
 /* ----- Follow line mode ----- */
 void followLine(){
+  int direction;
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==LOW)){
-    forward(100, 50);
+    forward(180, 20);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
-    halt();
+    if(direction == 1){
+      turnLeft(120, 30);
+    }
+    if(direction == 2){
+      turnRight(120, 30);
+    }
   }
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==HIGH)){
-    turnLeft(100, 50);
+    direction = 1;
+    turnLeft(100, 60);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==LOW)){
-    turnRight(100, 50);
+    direction = 2;
+    turnRight(100, 60);
   }
 }
 
@@ -259,65 +227,10 @@ void obstacleRace(){
     }
     getDistance();
   }
-  /* Not necessary I think... We can try out if it makes a difference.
-   * 
-   *  for(int i = 0; i < 3; i++){
-   *    getDistance();
-   *    if(distance > 30){
-   *      forward(255, 50);
-   *    }
-   *  }
-   *  getDistance();
-   */
-}
-
-/* ---------------------- getting game modes ---------------------- */
-/*  get game mode from server   */
-String getGameMode() {
-  // game modes:
-  // 0    None
-  // 1    Obstacle race
-  // 2    Follow the line
-  // 3    Waypoints
-  // 4    Sumo
-  // 5    Football
-  if(serial.available() == 1) {
-    String serverMessage = ""; // Creates variable for serverMessage
-    serverMessage.concat((char)serial.read()); // Reads the character
-    if(serverMessage.length() == 1) { // Checks if message is only one character
-      return serverMessage; // returns serverMessage
-    }
-  }
-  return "";
 }
 
 /* --------------------------------------------------------- EXECUTING LOOP -------------------------------------------------------- */
 void loop(){
-  boolean manualControl = false;
-  if(GetServerMessage() != ""){
-    ProcessServer(GetServerMessage());
-    Serial.println(GetServerMessage());
-  }
   /* -- determining game mode --   */
-  String gameMode = getGameMode();
-  Serial.println(gameMode);
-  if(gameMode == "1"){
-    obstacleRace();
-  }
-  else if(gameMode == "2"){
-    followLine();
-  }
-  else if(gameMode == "3"){
-    waypoints();
-  }
-  else if((gameMode == "4") || (gameMode == "5")){
-    manualControl = true;
-    if(manualControl){
-      manual();
-      return;
-    }
-  }
-  else{
-    halt();
-  } 
+  //Get game mode, run appropriate game mode function depending on the game mode. 
 }
