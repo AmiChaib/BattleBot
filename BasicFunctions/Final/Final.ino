@@ -182,10 +182,10 @@ void followLine(){
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
     if(direction == 1){
-      turnLeft(120, 35);
+      turnLeft(120, 30);
     }
     if(direction == 2){
-      turnRight(120, 35);
+      turnRight(120, 30);
     }
     else{
       forward(150, 20);
@@ -228,11 +228,13 @@ void obstacleRace(){
     getDistance();
   }
 }
-
+int gameMode = 0;
 /* --------------------------------------------------------- EXECUTING LOOP -------------------------------------------------------- */
 void loop(){
   /* -- determining game mode --   */
-  int gameMode = GetServerMessage();
+  int temp = GetServerMessage();
+  if(temp != -1)
+    gameMode = temp;
   if(gameMode == 3 || gameMode == 4 || gameMode == 5){
     delay(50);
     return;
@@ -246,6 +248,7 @@ void loop(){
   else{
     halt();
   }
+  delay(50);
 }
 
 /* ------------------------------------------------------ SERVER STUFF ---------------------------------------------------------- */
@@ -264,7 +267,7 @@ int GetServerMessage() {
 }
 
 int ProcessServer(String serverMessage) {
-  if (serverMessage == "")
+  if (serverMessage.length() != 9)
     return -1;
   int FL = serverMessage.substring(0, 3).toInt();
   int FR = serverMessage.substring(3, 6).toInt();
@@ -272,7 +275,7 @@ int ProcessServer(String serverMessage) {
   int RR = serverMessage.substring(7, 8).toInt();
   int gameMode = serverMessage.substring(8).toInt();
 
-  if(gameMode != 4 && gameMode != 5) {
+  if(gameMode != 3 && gameMode != 4 && gameMode != 5) {
     return gameMode;
   }
   
