@@ -232,6 +232,65 @@ void obstacleRace(){
 /* --------------------------------------------------------- EXECUTING LOOP -------------------------------------------------------- */
 void loop(){
   /* -- determining game mode --   */
-  //Get game mode, run appropriate game mode function depending on the game mode. 
-  followLine();
+  int gameMode = GetServerMessage();
+  if(gameMode == 3 || gameMode == 4 || gameMode == 5){
+    delay(50);
+    return;
+  }
+  else if(gameMode == 1){
+    obstacleRace();
+  }
+  else if(gameMode == 2){
+    followLine();
+  }
+  else{
+    halt();
+  }
 }
+
+/* ------------------------------------------------------ SERVER STUFF ---------------------------------------------------------- */
+
+int GetServerMessage() {
+  if(serial.available() < 9)
+    return -1;
+  String serverMessage = "";
+  for (int i = 0; i < 9; i++) {
+    serverMessage.concat((char)serial.read());
+  }
+  if(serverMessage.indexOf(':') > -1)
+    serialFlush();
+
+  return ProcessServer(serverMessage);
+}
+
+int ProcessServer(String serverMessage) {
+  if (serverMessage == "")
+    return -1;
+  int FL = serverMessage.substring(0, 3).toInt();
+  int FR = serverMessage.substring(3, 6).toInt();
+  int RL = serverMessage.substring(6, 7).toInt();
+  int RR = serverMessage.substring(7, 8).toInt();
+  int gameMode = serverMessage.substring(8).toInt();
+
+  if(gameMode != 4 && gameMode != 5) {
+    return gameMode;
+  }
+  
+  analogWrite(m_FL, FL);
+  analogWrite(m_FR, FR);
+  if(RL != 0)
+    digitalWrite(m_RL, HIGH);
+  else
+    digitalWrite(m_RL, LOW);
+  if(RR != 0)
+    digitalWrite(m_RR, HIGH);
+  else
+    digitalWrite(m_RR, LOW);
+  return gameMode;
+}
+
+void serialFlush(){
+  while(serial.available() > 0) {
+    serial.read();
+  }
+} 
