@@ -182,10 +182,10 @@ void followLine(){
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
     if(direction == 1){
-      turnLeft(120, 50);
+      turnLeft(120, 35);
     }
     if(direction == 2){
-      turnRight(120, 50);
+      turnRight(120, 35);
     }
     else{
       forward(150, 20);
