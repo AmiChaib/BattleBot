@@ -178,14 +178,17 @@ void waypoints(){
 void followLine(){
   int direction;
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==LOW)){
-    forward(180, 20);
+    forward(150, 20);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
     if(direction == 1){
-      turnLeft(120, 30);
+      turnLeft(120, 50);
     }
     if(direction == 2){
-      turnRight(120, 30);
+      turnRight(120, 50);
+    }
+    else{
+      forward(150, 20);
     }
   }
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==HIGH)){
