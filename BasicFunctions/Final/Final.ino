@@ -4,7 +4,7 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-/* !! SET UP FOR NUMBER 10 !! */
+/* !! SET UP FOR NUMBER 11 !! */
 /* ------------------------------------------------------ DEFINING CONSTANTS ------------------------------------------------------  */
 /* ------- Bluetooth -------  */
 #define RxD A0
@@ -70,8 +70,6 @@ void halt(){
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Stop!");
-  lcd.setCursor(0, 1);
-  lcd.print("Awaiting orders!");
 }
 
 /* Just to clarify: 
@@ -114,7 +112,7 @@ void turnRight(int speeed, int timey){
     //I wish we had LEDs on both sides of the arduino, like the indicators on a car :3
     lcd.print("To the right!"); 
     analogWrite(motorForwardLeft, speeed);
-    analogWrite(motorBackwardsRight, speeed);
+    analogWrite(motorBackwardsRight, 255);
     delay(timey);
   } 
 }
@@ -127,7 +125,7 @@ void turnLeft(int speeed, int timey){
     lcd.setCursor(0, 0);
     lcd.print("To the left!");
     analogWrite(motorForwardRight, speeed);
-    analogWrite(motorBackwardsLeft, speeed);
+    analogWrite(motorBackwardsLeft, 255);
     delay(timey);
   } 
 }
@@ -175,7 +173,6 @@ void manual(){
 }
 /* -------- Waypoints --------  */
 void waypoints(){
-  halt(); //replace with waypoints method
 }
 /* ----- Follow line mode ----- */
 void followLine(){
@@ -233,4 +230,5 @@ void obstacleRace(){
 void loop(){
   /* -- determining game mode --   */
   //Get game mode, run appropriate game mode function depending on the game mode. 
+  followLine();
 }
