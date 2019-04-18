@@ -132,12 +132,12 @@ void turnLeft(int speeed, int timey){
 
 /* -- turning right 90 degr --  */
 void right90(){
-  turnRight(255, 350);
+  turnRight(255, 275);
 }
 
 /* --- turning left 90 degr --- */
 void left90(){
-  turnLeft(255, 350);
+  turnLeft(255, 275);
 }
 
 /* ---- measuring distance ---- */
@@ -157,13 +157,15 @@ void getDistance(){
 
 /* -- determining direction --  */
 int index = 0;
+int timeTurned = 0;
 void getDirection(){
   if(index == 0){
-    turnLeft(255, 30);
+    turnLeft(255, 50);
   }
   else{
-    turnRight(255, 30);
+    turnRight(255, 50);
   }
+  timeTurned = timeTurned + 50;
 }
 
 /* ------------------------------------------------------------- MODES ------------------------------------------------------------- */
@@ -203,27 +205,26 @@ void followLine(){
 
 /* ---- Obstacle Race mode ---- */
 void obstacleRace(){
-  int timeTurned = 0;
   getDistance();
-  while(distance > 30){
-    forward(255, 50);
+  while(distance > 25){
+    forward(220, 30);
     getDistance();
   }
   halt();
-  backwards(255, 30);
-  while(distance <= 30){
+  backwards(220, 30);
+  while(distance <= 35){
     getDirection();
-    timeTurned += 30;
-    if((timeTurned > 350)){
+    if((timeTurned > 250)){
       if(index == 0){
         right90();
         index = 1; 
+        timeTurned = 0;
       }
       else{
         left90();
         index = 0;
+        timeTurned = 0;
       }     
-      timeTurned = 0;
     }
     getDistance();
   }
@@ -235,6 +236,8 @@ void loop(){
   int temp = GetServerMessage();
   if(temp != -1)
     gameMode = temp;
+  //delete later: 
+  gameMode = 2;  
   if(gameMode == 3 || gameMode == 4 || gameMode == 5){
     delay(50);
     return;
