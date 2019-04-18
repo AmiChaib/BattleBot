@@ -237,7 +237,7 @@ void loop(){
   if(temp != -1)
     gameMode = temp;
   //delete later: 
-  gameMode = 2;  
+  gameMode = 1;  
   if(gameMode == 3 || gameMode == 4 || gameMode == 5){
     delay(50);
     return;
