@@ -4,11 +4,11 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-/* !! SET UP FOR NUMBER 11 !! */
+/* !! SET UP FOR NUMBER 08 !! */
 /* ------------------------------------------------------ DEFINING CONSTANTS ------------------------------------------------------  */
 /* ------- Bluetooth -------  */
-#define RxD A0
-#define TxD A1
+#define RxD A0 //receiving
+#define TxD A1 //transmitting
 /* --------- Motors --------- */ 
 //motor forward left
 #define m_FL 3
@@ -73,8 +73,8 @@ void halt(){
 }
 
 /* Just to clarify: 
- * 'speed' and 'time' seem to have some other use and so in the following I chose speeed and timey instead.
- * So we should not get any problems with that. #safetyFirst :)
+ * 'speed' and 'time' seem to have some other use and so in the following I chose speeed and timey as variables instead.
+ * Just to avoid any problems with that. #safetyFirst :)
  */
 
 /* ----- moving forward -----   */
@@ -109,7 +109,6 @@ void turnRight(int speeed, int timey){
     halt();
     lcd.clear();
     lcd.setCursor(0, 0);
-    //I wish we had LEDs on both sides of the arduino, like the indicators on a car :3
     lcd.print("To the right!"); 
     analogWrite(motorForwardLeft, speeed);
     analogWrite(motorBackwardsRight, 255);
@@ -132,11 +131,13 @@ void turnLeft(int speeed, int timey){
 
 /* -- turning right 90 degr --  */
 void right90(){
+  //On number 8 with rubberbands, for turning 90°, the delay at speed 255 is 275
   turnRight(255, 275);
 }
 
 /* --- turning left 90 degr --- */
 void left90(){
+  //On number 8 with rubberbands, for turning 90°, the delay at speed 255 is 275
   turnLeft(255, 275);
 }
 
@@ -170,12 +171,6 @@ void getDirection(){
 
 /* ------------------------------------------------------------- MODES ------------------------------------------------------------- */
 /* ------------------- functions for game modes ------------------- */
-/* ------ Manual control ------ */
-void manual(){
-}
-/* -------- Waypoints --------  */
-void waypoints(){
-}
 /* ----- Follow line mode ----- */
 void followLine(){
   int direction;
@@ -229,15 +224,16 @@ void obstacleRace(){
     getDistance();
   }
 }
-int gameMode = 0;
+
 /* --------------------------------------------------------- EXECUTING LOOP -------------------------------------------------------- */
+int gameMode = 0;
 void loop(){
   /* -- determining game mode --   */
   int temp = GetServerMessage();
-  if(temp != -1)
+  if(temp != -1){
     gameMode = temp;
-  //delete later: 
-  gameMode = 1;  
+  }
+  /* ---- running game mode ----   */
   if(gameMode == 3 || gameMode == 4 || gameMode == 5){
     delay(50);
     return;
