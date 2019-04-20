@@ -1,2 +1,2 @@
-# BattleBot
-Group IT1C Project BattleBot
+# Project BattleBot Group IT1C
+ 
