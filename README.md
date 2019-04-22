@@ -39,12 +39,18 @@ Which returns the processed server message as *int gameMode*. A valid *gameMode*
 
 ## Function obstacleRace()
 
+The obstacleRace() function checks the distance between the bot and the next obstacle; when the distance is too small the direction to turn to is determined, if the total turning degree has been larger than 90°, the bot is turned back to its initial direction.
+  > - Measures distance through getDistance() function.
+  > - As long as the returned distance value is larger than 25 calls forward() function with a speed of 220 for 30ms, then               triggeres getDistance again.
+  > - Distance value is less than 25, calls halt() and then backwards() function and determines direction through getDirection()         function. getDirection() turns the bot into chosen direction and increases the local variable *timeTurned* by the time the         bot turned into that direction.
+  > - If timeTurned reaches more than 250 (close to time a 90° turn takes (for #08 275ms)) turns back 90° and resets variables,         changes index (needed for getDirection() to determine direction).
+
 
 ## Function followLine()
 
 The followLine() funtion checks whether the left sensor **LS** or the right sensor **RS** detect a black line.
 A local variable *int direction* is created.
-  > - As long as no black line is detected, the forward() function is triggered with a speed of 150 for 20ms.
+  > - If **no black line is detected**, the forward() function is triggered with a speed of 150 for 20ms.
   > - If the **RS detects a black line** and LS does not, the turnLeft() function is triggered with a speed of 100 for 60ms and         *direction* is set to 1.
   > - If the **LS detects a black line** and RS does not, the turnRight() function is triggered with a speed of 100 for 60ms and         *direction* is set to 2.
   > - If **both sensors detect a black line** and ***direction* is 1** (it was turning left previously), the turnLeft() function         is triggered with a speed of 120 for 30ms.
