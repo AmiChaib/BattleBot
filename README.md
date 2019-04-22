@@ -6,24 +6,23 @@ The main file is [Final.ino](/BasicFunctions/Final/Final.ino).
 
 The main function is 
   ```java
-  void loop(){}
+  void loop() {...}
   ```
 it first calls
   ```java
-  int getServerMessage(){}
+  int getServerMessage() {...}
   ```
-Which returns the processed server message as *int gameMode*. 
-A valid *gameMode* can be between 1 and 5.
+Which returns the processed server message as *int gameMode*. A valid *gameMode* can be between 1 and 5.
 
 - For a manually controlled *gameMode*
     ```java
-    int ProcessServer(String serverMessage) {}
+    int ProcessServer(String serverMessage) {...}
     ```
   directly triggeres the motors.
 
 - For a not manually controlled *gameMode*
     ```java
-    void loop(){}
+    void loop() {...}
     ```
   calles the corresponding function.
 
@@ -37,3 +36,19 @@ A valid *gameMode* can be between 1 and 5.
 | 4     | Sumo                      | manual            |
 | 5     | Football                  | manual            |
 
+
+## Function obstacleRace()
+
+
+## Function followLine()
+
+The followLine() funtion checks whether the left sensor **LS** or the right sensor **RS** detect a black line.
+A local variable *int direction* is created.
+  > - As long as no black line is detected, the forward() function is triggered with a speed of 150 for 20ms.
+  > - If the right sensor detects a black line and the left one does not, the turnLeft() function is triggered with a speed of 100   >   for 60ms and *direction* is set to 1.
+  > - If the lef sensor detects a black line and the right one does not, the turnRight() function is triggered with a speed of 100   >   for 60ms and *direction* is set to 2.
+  > - If both sensors detect a black line and *direction* is 1 (it was turning left previously), the turnLeft() function is         >   triggered with a speed of 120 for 30ms.
+  > - If both sensors detect a black line and *direction* is 2 (it was turning right previously), the turnRight() function is 
+  >   triggered with a speed of 120 for 30ms.
+  > - If both sensors detect a black line and *direction* is anything else, the forward() function is
+  >   triggered with a speed of 150 for 20ms.
