@@ -45,10 +45,9 @@ Which returns the processed server message as *int gameMode*. A valid *gameMode*
 The followLine() funtion checks whether the left sensor **LS** or the right sensor **RS** detect a black line.
 A local variable *int direction* is created.
   > - As long as no black line is detected, the forward() function is triggered with a speed of 150 for 20ms.
-  > - If the **RS detects a black line** and LS does not, the turnLeft() function is triggered with a speed of 100 for 60ms and *direction* is set to 1.
-  > - If the **LS detects a black line** and RS does not, the turnRight() function is triggered with a speed of 100 for 60ms and *direction* is set to 2.
-  > - If both sensors detect a black line and *direction* is 1 (it was turning left previously), the turnLeft() function is             triggered with a speed of 120 for 30ms.
-  > - If both sensors detect a black line and *direction* is 2 (it was turning right previously), the turnRight() function is 
-      triggered with a speed of 120 for 30ms.
-  > - If both sensors detect a black line and *direction* is anything else, the forward() function is
+  > - If the **RS detects a black line** and LS does not, the turnLeft() function is triggered with a speed of 100 for 60ms and         *direction* is set to 1.
+  > - If the **LS detects a black line** and RS does not, the turnRight() function is triggered with a speed of 100 for 60ms and         *direction* is set to 2.
+  > - If **both sensors detect a black line** and ***direction* is 1** (it was turning left previously), the turnLeft() function         is triggered with a speed of 120 for 30ms.
+  > - If **both sensors detect a black line** and ***direction* is 2** (it was turning right previously), the turnRight() function       is triggered with a speed of 120 for 30ms.
+  > - If **both sensors detect a black line** and ***direction* is anything else**, the forward() function is
       triggered with a speed of 150 for 20ms.
