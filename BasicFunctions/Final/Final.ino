@@ -173,9 +173,17 @@ void getDirection(){
 /* ------------------- functions for game modes ------------------- */
 /* ----- Follow line mode ----- */
 void followLine(){
-  int direction;
+  int direction = 0;
   if((digitalRead(LS)==LOW) && (digitalRead(RS)==LOW)){
     forward(150, 20);
+  }
+  if((digitalRead(LS)==LOW) && (digitalRead(RS)==HIGH)){
+    direction = 1;
+    turnLeft(100, 60);
+  }
+  if((digitalRead(LS)==HIGH) && (digitalRead(RS)==LOW)){
+    direction = 2;
+    turnRight(100, 60);
   }
   if((digitalRead(LS)==HIGH) && (digitalRead(RS)==HIGH)){
     if(direction == 1){
@@ -187,14 +195,6 @@ void followLine(){
     else{
       forward(150, 20);
     }
-  }
-  if((digitalRead(LS)==LOW) && (digitalRead(RS)==HIGH)){
-    direction = 1;
-    turnLeft(100, 60);
-  }
-  if((digitalRead(LS)==HIGH) && (digitalRead(RS)==LOW)){
-    direction = 2;
-    turnRight(100, 60);
   }
 }
 
