@@ -62,4 +62,7 @@ A local variable *int direction* is created.
   > - If **both sensors detect a black line** and ***direction* is anything else**, the forward() function is
       triggered with a speed of 150 for 20ms.
 
-#### Basic Functions
+
+### Basic Functions
+
+Here you can find a short explanation for all basic funtions used in obstacleRace() and followLine(). 
