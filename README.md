@@ -17,17 +17,15 @@ int getServerMessage(){
 Which returns the processed server message as *int gameMode*. 
 A valid *gameMode* can be between 1 and 5.
 
-For a manually controlled *gameMode*
+- For a manually controlled *gameMode*
 ```java
-int ProcessServer(String serverMessage) {
-}
+int ProcessServer(String serverMessage) {}
 ```
 directly triggeres the motors.
 
-For a not manually controlled *gameMode*
+- For a not manually controlled *gameMode*
 ```java
-void loop(){
-}
+void loop(){}
 ```
 calles the corresponding function.
 
