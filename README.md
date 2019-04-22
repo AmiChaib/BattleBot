@@ -37,7 +37,7 @@ Which returns the processed server message as *int gameMode*. A valid *gameMode*
 | 5     | Football                  | manual            |
 
 
-## Function obstacleRace()
+### Function obstacleRace()
 
 The obstacleRace() function checks the distance between the bot and the next obstacle; when the distance is too small the direction to turn to is determined, if the total turning degree has been larger than 90°, the bot is turned back to its initial direction.
 
@@ -48,7 +48,7 @@ The obstacleRace() function checks the distance between the bot and the next obs
   > - If timeTurned reaches more than 250 (close to time a 90° turn takes (for #08 275ms)) turns back 90° and resets variables,         changes index (needed for getDirection() to determine direction).
 
 
-## Function followLine()
+### Function followLine()
 
 The followLine() funtion checks whether the left sensor **LS** or the right sensor **RS** detect a black line.
 A local variable *int direction* is created.
@@ -61,3 +61,5 @@ A local variable *int direction* is created.
   > - If **both sensors detect a black line** and ***direction* is 2** (it was turning right previously), the turnRight() function       is triggered with a speed of 120 for 30ms.
   > - If **both sensors detect a black line** and ***direction* is anything else**, the forward() function is
       triggered with a speed of 150 for 20ms.
+
+#### Basic Functions
