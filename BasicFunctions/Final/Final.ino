@@ -207,7 +207,7 @@ void obstacleRace(){
   }
   halt();
   backwards(220, 30);
-  while(distance <= 35){
+  while(distance <= 30){
     getDirection();
     if((timeTurned > 250)){
       if(index == 0){
