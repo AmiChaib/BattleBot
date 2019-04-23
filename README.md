@@ -69,63 +69,37 @@ A local variable *int direction* is created.
 
 Here you can find a short explanation for all basic funtions used in obstacleRace() and followLine(). 
 
-  - 
-  ```java
-  void halt(){...}
-  ```
-  stops all motors, prints "Stop!" on lcd display.
+  -  ```java void halt(){...} ```
+      -> stops all motors, prints "Stop!" on lcd display.
   
-  - 
-  ```java
-  void forward(int speeed, int timey){...}
-  ```
-  uses *halt()* then spins motors forward with input speed (parameter *speedy* - must be between 0 and 256) and for time in ms       (parameter *timey*), prints "Wiu wiu wiu!" on lcd display.
+  - ```java void forward(int speeed, int timey){...} ```
+      -> uses *halt()* then spins motors forward with input speed (parameter *speedy* - must be between 0 and 256) and for time in          ms (parameter *timey*), prints "Wiu wiu wiu!" on lcd display.
   
   
-  - 
-  ```java
-  void backwards(int speeed, int timey){...}
-  ```
-  uses *halt()* then spins motors backwards with input speed (parameter *speedy* - must be between 0 and 256) and for time in ms     (parameter *timey*), prints "Beep beep beep!" on lcd display.
+  - ```java void backwards(int speeed, int timey){...} ```
+      -> uses *halt()* then spins motors backwards with input speed (parameter *speedy* - must be between 0 and 256) and for time          in ms (parameter *timey*), prints "Beep beep beep!" on lcd display.
   
   
-  - 
-  ```java
-  void turnRight(int speeed, int timey){...}
-  ```
-  uses *halt()* then spins left motor forward with input speed (parameter *speedy* - must be between 0 and 256) and right motor     backwards at full speed to turn right for time in ms (parameter *timey*), prints "To the right!" on lcd display.
+  - ```java void turnRight(int speeed, int timey){...} ```
+      -> uses *halt()* then spins left motor forward with input speed (parameter *speedy* - must be between 0 and 256) and right            motor backwards at full speed to turn right for time in ms (parameter *timey*), prints "To the right!" on lcd display.
   
   
-  - 
-  ```java
-  void turnleft(int speeed, int timey){...}
-  ```
-  uses *halt()* then spins right motor forward with input speed (parameter *speedy* - must be between 0 and 256) and left motor     backwards at full speed to turn left for time in ms (parameter *timey*), prints "To the left!" on lcd display.
+  - ```java void turnleft(int speeed, int timey){...} ```
+      -> uses *halt()* then spins right motor forward with input speed (parameter *speedy* - must be between 0 and 256) and left            motor backwards at full speed to turn left for time in ms (parameter *timey*), prints "To the left!" on lcd display.
   
   
-  - 
-  ```java
-  void right90(){...}
-  ```
-  uses *turnRight(255, 275)* (255 = full speed, 275ms is the time robot 8 with rubberbands took to turn 90°).
+  - ```java void right90(){...} ```
+      -> uses *turnRight(255, 275)* function to turn right 90° (255 = full speed, 275ms is the time robot 8 with rubberbands took          to turn 90°).
   
-  - 
-  ```java
-  void left90(){...}
-  ```
-  uses *turnLeft(255, 275)* (255 = full speed, 275ms is the time robot 8 with rubberbands took to turn 90°).
+  - ```java void left90(){...} ```
+      -> uses *turnLeft(255, 275)* function to turn left 90° (255 = full speed, 275ms is the time robot 8 with rubberbands took to          turn 90°).
   
-  - 
-  ```java
-  void getDistance(){...}
-  ```
-  triggers ultrasonic sensors (transmits and receives signal) and calculates a value for distance.
+  - ```java void getDistance(){...} ```
+      -> triggers ultrasonic sensors (transmits and receives signal) and calculates a value for distance.
   
-  - 
-  ```java
-  void getDirection(){...}
-  ```
-  depending on previous direction (indicated by *int index* set in *obstacleRace()* function) turns bot into the opposite           direction and adds the time it has turned to *int timeTurned* (used in *obstacleRace()* function).
+  - ```java void getDirection(){...} ```
+      -> depending on previous direction (indicated by *int index* set in *obstacleRace()* function) turns bot into the opposite           direction and adds the time it has turned to *int timeTurned* (used in *obstacleRace()* function).
+
 
 
 
