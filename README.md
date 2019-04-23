@@ -15,6 +15,7 @@ it first calls
   int getServerMessage() {...}
   ```
 Which returns the processed server message as *int gameMode*. A valid *gameMode* can be between 1 and 5.
+
 **Here a game mode overview:**
 
 | int   | game mode description     | function          | 
