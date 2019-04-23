@@ -99,10 +99,9 @@ Here you can find a short explanation for all basic funtions used in obstacleRac
   
   - ```void getDirection(){...} ```  
       -> depending on previous direction (indicated by *int index* set in *obstacleRace()* function) turns bot into the opposite           direction and adds the time it has turned to *int timeTurned* (used in *obstacleRace()* function).
-  
-  
-  
-  
+      <br>
+      <br>
+      <br>
 > Authors of code: Philip Blesinger, Christof du Toit, Amira Chaib
 
 > Author of documentation: Amira Chaib
