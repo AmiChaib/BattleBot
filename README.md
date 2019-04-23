@@ -1,7 +1,6 @@
 # Project BattleBot Group IT1C
-> Authors of code: Philip Blesinger, Christof du Toit, Amira Chaib
 
-> Author of documentation: Amira Chaib
+In the following you can find a description of how our program works. The function mainly used are described in more detail.
 
 ## Overview
 
@@ -126,3 +125,9 @@ Here you can find a short explanation for all basic funtions used in obstacleRac
   void getDirection(){...}
   ```
   depending on previous direction (indicated by *int index* set in *obstacleRace()* function) turns bot into the opposite           direction and adds the time it has turned to *int timeTurned* (used in *obstacleRace()* function).
+
+
+
+> Authors of code: Philip Blesinger, Christof du Toit, Amira Chaib
+
+> Author of documentation: Amira Chaib
