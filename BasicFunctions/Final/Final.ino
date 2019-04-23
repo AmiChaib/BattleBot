@@ -1,3 +1,8 @@
+/* Project battle bot group IT1C
+ *    Purpose: Run Arduino bot through various battles.
+ *    Authors: Philip Blesinger, Christof du Toit, Amira Chaib
+ */
+
 /* ----------------------------------------------------------- LIBRARIES ----------------------------------------------------------- */
 #include <SoftwareSerial.h>
 #include <Wire.h>
