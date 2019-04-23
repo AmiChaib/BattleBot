@@ -1,5 +1,6 @@
 # Project BattleBot Group IT1C
 > Authors of code: Philip Blesinger, Christof du Toit, Amira Chaib
+
 > Author of documentation: Amira Chaib
 
 ## Overview
