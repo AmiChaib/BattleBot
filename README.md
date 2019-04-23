@@ -70,10 +70,10 @@ A local variable *int direction* is created.
 Here you can find a short explanation for all basic funtions used in obstacleRace() and followLine(). 
 
   -  ```void halt(){...} ```
-      -> stops all motors, prints "Stop!" on lcd display.
+        -> stops all motors, prints "Stop!" on lcd display.
   
   - ```void forward(int speeed, int timey){...} ```
-      -> uses *halt()* then spins motors forward with input speed (parameter *speedy* - must be between 0 and 256) and for time in          ms (parameter *timey*), prints "Wiu wiu wiu!" on lcd display.
+        -> uses *halt()* then spins motors forward with input speed (parameter *speedy* - must be between 0 and 256) and for time            in ms (parameter *timey*), prints "Wiu wiu wiu!" on lcd display.
   
   
   - ```void backwards(int speeed, int timey){...} ```
